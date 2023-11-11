@@ -3,6 +3,7 @@
 // set up file structure
 // set up .env file for url, password, user, and name
 // set up rerouter *** 
+// req in model and datatype from sequelize
 
 // define models in folder with files
 // create catModel productModel productTagModel and tagModel js files

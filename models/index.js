@@ -13,6 +13,8 @@ const ProductTagModel = require("./productTagModel");
 // and hasmany
 // export the models here as object
 
+ProductModel.belongsTo(CategoryModel)
+
 module.exports = {
   ProductModel,
   CategoryModel,
