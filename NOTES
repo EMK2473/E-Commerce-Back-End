@@ -2,6 +2,7 @@
 // install dependencies
 // set up file structure
 // set up .env file for url, password, user, and name
+// set up rerouter *** 
 
 // define models in folder with files
 // create catModel productModel productTagModel and tagModel js files
