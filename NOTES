@@ -1,0 +1,35 @@
+// todos:
+// install dependencies
+// set up file structure
+// set up .env file for url, password, user, and name
+
+// define models in folder with files
+// create catModel productModel productTagModel and tagModel js files
+// use these for seeds and routes
+// can req in tagmodel and productmodel for all tag routes
+// export models out for use
+
+
+// set up routes folder for each model type
+// categor route
+// product route
+// tag route   // use all tagmodel routes
+// producttag routle
+// can req tag and product individually 
+
+// define seeds folder for each inventory of database
+// category seeds
+// product seeds
+// product tag seeds
+// tag seeds
+
+// create (index)server.js file for handling the server
+// req express
+// req the routes
+// define app
+// define local host port
+// process.env here too? research how it works here
+// req sequalize connection
+// make app listen
+
+
