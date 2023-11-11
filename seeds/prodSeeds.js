@@ -3,6 +3,32 @@ const { ProductModel } = require('../models');
 
 // define product seed here
 
+const productData = [
+    {
+        productName: 'prodName1',
+        price: '0.99',
+        stock: '1',
+        categoryID: 1,
+    },
+    {
+        productName: 'prodName2',
+        price: '0.99',
+        stock: '1',
+        categoryID: 2,
+    },
+    {
+        productName: 'prodName3',
+        price: '0.99',
+        stock: '1',
+        categoryID: 3,
+    },
+    {
+        productName: 'prodName4',
+        price: '0.99',
+        stock: '1',
+        categoryID: 4,
+    },
+]
 
 // productData == []
 // productObject1
@@ -18,5 +44,5 @@ const { ProductModel } = require('../models');
 // productObject6
     // categoryID
 
-// seedProducts -> bulkCreate(productData)
+const seedProducts = () => ProductModel.bulkCreate(productData)
 module.exports = seedProducts;
