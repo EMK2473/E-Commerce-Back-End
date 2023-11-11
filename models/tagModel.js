@@ -5,7 +5,6 @@ class TagModel extends Model {}
 
 TagModel.init(
   {
-    // Define columns for the tag table
     id: {
       type: DataTypes.INTEGER, 
       allowNull: false, 
@@ -24,7 +23,6 @@ TagModel.init(
     modelName: "tag",
   }
 );
-
 module.exports = TagModel;
 
 
