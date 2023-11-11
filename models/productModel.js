@@ -32,9 +32,9 @@ ProductModel.init(
         },
       },
       category_id: {
-        type: DataTypes.INTEGER, // Set the data type to INTEGER
+        type: DataTypes.INTEGER,
         references: {
-          model: "category", // Reference the 'category' table
+          model: "product", 
         },
     }
   },
@@ -46,11 +46,4 @@ ProductModel.init(
     modelName: 'driver',
   }
 );
-
-
-
-
-
-
-
 module.exports = ProductModel;
