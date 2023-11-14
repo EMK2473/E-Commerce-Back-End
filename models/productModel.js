@@ -43,7 +43,7 @@ ProductModel.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'driver',
+    modelName: 'product',
   }
 );
 module.exports = ProductModel;
