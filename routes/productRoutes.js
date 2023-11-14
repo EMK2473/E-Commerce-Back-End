@@ -40,6 +40,7 @@ router.post("/", async (req, res) => {
       res.status(400).json({ message: "ERROR creating new category!"});
     }
   });
+
 // put
 router.put('/:id', async (req, res) =>{
     try{
@@ -49,7 +50,7 @@ router.put('/:id', async (req, res) =>{
         
         // then, return newProdTag with req.body.tags
         // and .filter the tag_id => !productTagIds.includes(tag_id) .map(tag_id) => returns { prodcut_id: req.params.id, tag_id}
-        
+
     //     const productTagsToRemove = productTags
     //     .filter(({ tag_id }) => !req.body.tags.includes(tag_id))
     //     .map(({ id }) => id);
@@ -62,6 +63,13 @@ router.put('/:id', async (req, res) =>{
 })
 
 // delete
-
+router.delete('/:id', async (req, res) =>{
+    try{
+        const deletedID = await ProductModel.destroy({ where: { id: req.params.id }});
+        !deletedID ? res.status(404).json({ message: "ERROR ID not found!" }) : res.status(200).json(deletedID);
+    } catch (err){
+        res.status(500).json({ message: "ERROR Failed to delete product!"});
+    }
+});
 
 module.exports = productRoute;
