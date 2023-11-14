@@ -8,41 +8,41 @@ const productData = [
         productName: 'prodName1',
         price: '0.99',
         stock: '1',
-        categoryID: 1,
+        category_id: 1,
     },
     {
         productName: 'prodName2',
         price: '0.99',
         stock: '1',
-        categoryID: 2,
+        category_id: 2,
     },
     {
         productName: 'prodName3',
         price: '0.99',
         stock: '1',
-        categoryID: 3,
+        category_id: 3,
     },
     {
         productName: 'prodName4',
         price: '0.99',
         stock: '1',
-        categoryID: 4,
+        category_id: 4,
     },
 ]
 
 // productData == []
 // productObject1
-    // categoryID
+    // category_id
 // productObject2
-    // categoryID
+    // category_id
 // productObject3
-    // categoryID
+    // category_id
 // productObject4
-    // categoryID
+    // category_id
 // productObject5
-    // categoryID
+    // category_id
 // productObject6
-    // categoryID
+    // category_id
 
 const seedProducts = () => ProductModel.bulkCreate(productData)
 module.exports = seedProducts;
