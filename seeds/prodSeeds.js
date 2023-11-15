@@ -1,8 +1,6 @@
 const { ProductModel } = require('../models');
 // import the model of each data base model for row/column properties
-
 // define product seed here
-
 // 5 book products
 // added authors to base model set
 const productData = [
@@ -42,18 +40,6 @@ const productData = [
         category_id: 5, // children's book
     },
 ]
-
-// productData == []
-// productObject1
-    // category_id
-// productObject2
-    // category_id
-// productObject3
-    // category_id
-// productObject4
-    // category_id
-// productObject5
-    // category_id
 
 const seedProducts = () => ProductModel.bulkCreate(productData)
 module.exports = seedProducts;

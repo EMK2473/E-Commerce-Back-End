@@ -7,7 +7,7 @@
 // make app listen
 
 const express = require("express");
-const routes = require("./routes");
+const routes = require("./routes/API");
 const sequelize = require("./config/connect");
 
 const app = express();

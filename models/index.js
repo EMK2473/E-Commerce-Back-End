@@ -30,7 +30,8 @@ TagModel.belongsToMany(ProductModel, {
 
 CategoryModel.hasMany(ProductModel, {
   foreignKey: 'category_id'
-})
+});
+
 module.exports = {
   ProductModel,
   CategoryModel,

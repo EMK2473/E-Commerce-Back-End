@@ -23,6 +23,7 @@ TagModel.init(
     modelName: "tag", // name that is referenced in tables
   }
 );
+
 module.exports = TagModel;
 
 
