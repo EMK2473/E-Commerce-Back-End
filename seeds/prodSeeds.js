@@ -4,6 +4,7 @@ const { ProductModel } = require('../models');
 // define product seed here
 
 // 5 book products
+// added authors to base model set
 const productData = [
     {
         productName: "A good man is hard to find",

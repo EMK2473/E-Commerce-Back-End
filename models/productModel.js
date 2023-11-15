@@ -16,6 +16,17 @@ ProductModel.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+      isNotNumbers(value) {
+        if (/\d/.test(value)) { // no digits in author name
+          throw new Error('Author must not contain numbers.');
+          }
+        }
+      },
+    },
     price: {
       type: DataTypes.DECIMAL,
       allowNull: false,
