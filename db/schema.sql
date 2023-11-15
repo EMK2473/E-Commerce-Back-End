@@ -1,3 +1,2 @@
-
 DROP DATABASE if EXISTS eCom_db;
 CREATE DATABASE eCom_db;
