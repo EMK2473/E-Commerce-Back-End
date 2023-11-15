@@ -13,8 +13,24 @@ const ProductTagModel = require("./productTagModel");
 // and hasmany
 // export the models here as object
 
-ProductModel.belongsTo(CategoryModel)
 
+ProductModel.belongsTo(CategoryModel, {
+  foreignKey: 'category_id',
+});
+
+ProductModel.belongsToMany(TagModel, {
+  through: ProductTagModel,
+  foreignKey: 'product_id'
+});
+
+TagModel.belongsToMany(ProductModel, {
+  through: ProductTagModel,
+  foreignKey: 'tag_id'
+});
+
+CategoryModel.hasMany(ProductModel, {
+  foreignKey: 'category_id'
+})
 module.exports = {
   ProductModel,
   CategoryModel,

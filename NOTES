@@ -10,7 +10,8 @@
 // use these for seeds and routes
 // can req in tagmodel and productmodel for all tag routes
 // export models out for use
-
+// define relationships between models using
+// belongsto, belongstomany, hasmany..
 
 // set up routes folder for each model type
 // categor route
@@ -33,5 +34,6 @@
 // process.env here too? research how it works here
 // req sequalize connection
 // make app listen
+
 
 
