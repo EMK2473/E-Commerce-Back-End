@@ -3,30 +3,42 @@ const { ProductModel } = require('../models');
 
 // define product seed here
 
+// 5 book products
 const productData = [
     {
-        productName: 'prodName1',
-        price: '0.99',
-        stock: '1',
-        category_id: 1,
+        productName: "A good man is hard to find",
+        author: "Flannery O'Connor",
+        price: '9.99',
+        stock: '10',
+        category_id: 1, // short story
     },
     {
-        productName: 'prodName2',
-        price: '0.99',
-        stock: '1',
-        category_id: 2,
+        productName: 'Divine Comedy Trilogy: The Inferno, Purgatory, Paradise',
+        author: "Dante Alighieri",
+        price: '19.99',
+        stock: '5',
+        category_id: 2, // Fiction
     },
     {
-        productName: 'prodName3',
-        price: '0.99',
-        stock: '1',
-        category_id: 3,
+        productName: 'Scar Tissue',
+        author: "Anthony Kedis",
+        price: '9.99',
+        stock: '5',
+        category_id: 3, // biography
     },
     {
-        productName: 'prodName4',
-        price: '0.99',
+        productName: 'Art of War',
+        author: "Sun Tzu",
+        price: '19.99',
         stock: '1',
-        category_id: 4,
+        category_id: 4, // non-fiction
+    },
+    {
+        productName: "Aesop's Fables: The Classic Edition",
+        author: "Charles Santore",
+        price: '19.99',
+        stock: '1',
+        category_id: 5, // children's book
     },
 ]
 
@@ -40,8 +52,6 @@ const productData = [
 // productObject4
     // category_id
 // productObject5
-    // category_id
-// productObject6
     // category_id
 
 const seedProducts = () => ProductModel.bulkCreate(productData)

@@ -1,5 +1,8 @@
 const { TagModel } = require('../models');
 // import the model of each data base model for row/column properties
+
+
+// 5 tags?
 const tagData = [
     {
       tag_name: 'tag1',
@@ -15,12 +18,6 @@ const tagData = [
     },
     {
       tag_name: 'tag5',
-    },
-    {
-      tag_name: 'tag6',
-    },
-    {
-      tag_name: 'tag7',
     },
   ];
   

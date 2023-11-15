@@ -6,7 +6,7 @@ const ProdTagSeed = require("./prodTagSeeds.js");
 const sequelize = require("../config/connect.js");
 // require all of my seeding from each file
 // seed everythhing
-// function that asyncs => into await-ing on promise objects for each seed
+// async function that asyncs => awaits on promise objects for each seed
     // await all seeds
     // await all seeds
     // await all seeds

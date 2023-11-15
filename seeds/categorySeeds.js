@@ -1,21 +1,23 @@
 const { CategoryModel } = require("../models");
 // import the model of each data base model for row/column properties
 // define category seed here
+
+// 5 categories
 const categorySeedData = [
   {
-    categoryName: "Cat1",
+    categoryName: "Fiction",
   },
   {
-    categoryName: "Cat2",
+    categoryName: "Non-Fiction",
   },
   {
-    categoryName: "Cat3",
+    categoryName: "Short-Story",
   },
   {
-    categoryName: "Cat4",
+    categoryName: "Children's-Book",
   },
   {
-    categoryName: "Cat5",
+    categoryName: "Biography",
   },
 ];
 const seedCategories = () => CategoryModel.bulkCreate(categorySeedData);

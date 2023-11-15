@@ -8,7 +8,6 @@ class ProductTagModel extends Model {}
 
 ProductTagModel.init(
   {
-    // Define columns for the product_tag table
     id: {
       type: DataTypes.INTEGER, 
       allowNull: false, 
@@ -35,7 +34,7 @@ ProductTagModel.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "product_tag",
+    modelName: "product_tag", // name that is referenced in tables
   }
 );
 module.exports = ProductTagModel;

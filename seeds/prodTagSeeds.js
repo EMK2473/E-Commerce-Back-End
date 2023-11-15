@@ -1,6 +1,7 @@
 const { ProductTagModel } = require('../models');
 // import the model of each data base model for row/column properties
 
+// 5 product ids
 const prodTagData = [
     {
       product_id: 1,
@@ -21,14 +22,6 @@ const prodTagData = [
     {
       product_id: 5,
       tag_id: 1,
-    },
-    {
-      product_id: 6,
-      tag_id: 3,
-    },
-    {
-      product_id: 7,
-      tag_id: 4,
     },
   ];
   

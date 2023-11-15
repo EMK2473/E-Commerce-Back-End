@@ -20,7 +20,7 @@ TagModel.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "tag",
+    modelName: "tag", // name that is referenced in tables
   }
 );
 module.exports = TagModel;

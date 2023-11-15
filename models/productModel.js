@@ -43,7 +43,7 @@ ProductModel.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'product',
+    modelName: 'product', // name that is referenced in tables
   }
 );
 module.exports = ProductModel;
