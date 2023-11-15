@@ -87,4 +87,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = productRoute;
+module.exports = router;

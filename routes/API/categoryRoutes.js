@@ -74,4 +74,4 @@ router.delete("/:id", async (req, res) => {
 
 // delete
 
-module.exports = categoryRoute;
+module.exports = router;

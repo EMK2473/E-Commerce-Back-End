@@ -1,7 +1,7 @@
 // define product model object here
 // define columns for product in database
 const { Model, DataTypes } = require('sequelize');
-
+const sequelize = require("../config/connect");
 class ProductModel extends Model {}
 
 ProductModel.init(

@@ -1,8 +1,7 @@
 // define product tag model object here
 // define columns for product tag in database
 const { Model, DataTypes } = require('sequelize');
-
-const sequelize = require("../config/connection");
+const sequelize = require("../config/connect");
 
 class ProductTagModel extends Model {}
 

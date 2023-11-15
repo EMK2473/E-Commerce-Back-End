@@ -27,5 +27,4 @@ CategoryModel.init(
   }
 );
 
-
 module.exports = CategoryModel;
