@@ -1,11 +1,10 @@
-// definine category model object here
-// define columns for category in database
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require("../config/connect");
 
-class CategoryModel extends Model {}
+const sequelize = require('../config/connection.js');
 
-CategoryModel.init(
+class Category extends Model {}
+
+Category.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,7 +14,6 @@ CategoryModel.init(
     },
     categoryName: {
       type: DataTypes.STRING,
-      allowNull: false,
     }
   },
   {
@@ -23,8 +21,8 @@ CategoryModel.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'category', // name that is referenced in tables
+    modelName: 'category',
   }
 );
 
-module.exports = CategoryModel;
+module.exports = Category;

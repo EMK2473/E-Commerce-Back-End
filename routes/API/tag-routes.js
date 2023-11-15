@@ -1,24 +1,23 @@
-// req router for tag routes
-// req tag model in
-const router = require("express").Router();
-const { TagModel, ProductModel } = require("../../models");
+const router = require('express').Router();
+const { Tag, Product, ProductTag } = require('../../models');
 
-//get
+// The `/api/tags` endpoint
+
 router.get("/", async (req, res) => {
   try {
-    const tagData = await TagModel.findAll({
-      include: [{ model: ProductModel }],
+    const tagData = await Tag.findAll({
+      include: [{ model: Product }],
     });
     res.status(200).json(tagData);
   } catch (err) {
-    res.status(500).json({ message: "ERROR Tag not found!" });
+    res.status(500).json({ message: "ERROR Tags not found!" });
   }
 });
 
 router.get("/:id", async (req, res) => {
   try {
-    const tagData = await TagModel.findByPk(req.params.id, {
-      include: [{ model: ProductModel }],
+    const tagData = await Tag.findByPk(req.params.id, {
+      include: [{ model: Product }],
     });
     if (!tagData) {
       res.status(404).json({ message: "ERROR Tag not found!" });
@@ -30,20 +29,18 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//post
 router.post("/", async (req, res) => {
   try {
-    const tagData = await TagModel.create(req.body);
+    const tagData = await Tag.create(req.body);
     res.status(200).json(tagData);
   } catch (err) {
     res.status(400).json({ message: "ERROR Failed creating Tag!" });
   }
 });
 
-// put
 router.put("/:id", async (req, res) => {
   try {
-    const updated = await TagModel.update(req.body, {
+    const updated = await Tag.update(req.body, {
       where: { id: req.params.id },
     });
     !updated[0]
@@ -54,10 +51,9 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// delete
 router.delete("/:id", async (req, res) => {
   try {
-    const deleted = await TagModel.destroy({ where: { id: req.params.id } });
+    const deleted = await Tag.destroy({ where: { id: req.params.id } });
     !deleted
       ? res.status(404).json({ message: "ERROR No Tag found!" })
       : res.status(200).json(deleted);

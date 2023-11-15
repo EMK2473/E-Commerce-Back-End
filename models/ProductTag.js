@@ -1,11 +1,10 @@
-// define product tag model object here
-// define columns for product tag in database
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require("../config/connect");
 
-class ProductTagModel extends Model {}
+const sequelize = require('../config/connection');
 
-ProductTagModel.init(
+class ProductTag extends Model {}
+
+ProductTag.init(
   {
     id: {
       type: DataTypes.INTEGER, 
@@ -33,23 +32,8 @@ ProductTagModel.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "product_tag", // name that is referenced in tables
+    modelName: 'product_tag',
   }
 );
-module.exports = ProductTagModel;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = ProductTagModel;
+module.exports = ProductTag;

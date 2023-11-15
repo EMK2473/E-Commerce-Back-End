@@ -1,40 +1,35 @@
-// import model paths
-const ProductModel = require("./productModel");
-const CategoryModel = require("./categoryModel");
-const TagModel = require("./tagModel");
-const ProductTagModel = require("./productTagModel");
-// models are the models for each column the data tables
-// each column is defined by their properties keys&&values
+// import models
+const Product = require('./Product');
+const Category = require('./Category');
+const Tag = require('./Tag');
+const ProductTag = require('./ProductTag');
 
-// relate the models here
-// using belongs and has methods
-// belongsTo
-// belongsToMany
-// and hasmany
-// export the models here as object
-
-
-ProductModel.belongsTo(CategoryModel, {
+// Products belongsTo Category
+Product.belongsTo(Category, {
   foreignKey: 'category_id',
 });
 
-ProductModel.belongsToMany(TagModel, {
-  through: ProductTagModel,
-  foreignKey: 'product_id'
-});
-
-TagModel.belongsToMany(ProductModel, {
-  through: ProductTagModel,
-  foreignKey: 'tag_id'
-});
-
-CategoryModel.hasMany(ProductModel, {
+// Categories have many Products
+Category.hasMany(Product, {
   foreignKey: 'category_id'
 });
 
+// Products belongToMany Tags (through ProductTag)
+Product.belongsToMany(Tag, {
+  through: ProductTag,
+  foreignKey: 'product_id'
+});
+
+// Tags belongToMany Products (through ProductTag)
+Tag.belongsToMany(Product, {
+  through: ProductTag,
+  foreignKey: 'tag_id'
+});
+
+
 module.exports = {
-  ProductModel,
-  CategoryModel,
-  TagModel,
-  ProductTagModel,
+  Product,
+  Category,
+  Tag,
+  ProductTag,
 };

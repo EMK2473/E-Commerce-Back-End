@@ -1,10 +1,13 @@
-// define product model object here
-// define columns for product in database
+// import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require("../config/connect");
-class ProductModel extends Model {}
+// import our database connection from config.js
+const sequelize = require('../config/connection');
 
-ProductModel.init(
+// Initialize Product model (table) by extending off Sequelize's Model class
+class Product extends Model {}
+
+// set up fields and rules for Product model
+Product.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,17 +18,6 @@ ProductModel.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    author: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-      isNotNumbers(value) {
-        if (/\d/.test(value)) { // no digits in author name
-          throw new Error('Author must not contain numbers.');
-          }
-        }
-      },
     },
     price: {
       type: DataTypes.DECIMAL,
@@ -42,7 +34,7 @@ ProductModel.init(
           isNumeric: true, 
         },
       },
-      category_id: {
+    category_id: {
         type: DataTypes.INTEGER,
         references: {
           model: "category", 
@@ -54,7 +46,8 @@ ProductModel.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'product', // name that is referenced in tables
+    modelName: 'product',
   }
 );
-module.exports = ProductModel;
+
+module.exports = Product;

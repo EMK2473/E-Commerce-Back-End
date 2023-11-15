@@ -1,9 +1,10 @@
-// define tag model object here 
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require("../config/connect");
-class TagModel extends Model {}
 
-TagModel.init(
+const sequelize = require('../config/connection.js');
+
+class Tag extends Model {}
+
+Tag.init(
   {
     id: {
       type: DataTypes.INTEGER, 
@@ -20,26 +21,8 @@ TagModel.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "tag", // name that is referenced in tables
+    modelName: 'tag',
   }
 );
 
-module.exports = TagModel;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = TagModel;
+module.exports = Tag;
