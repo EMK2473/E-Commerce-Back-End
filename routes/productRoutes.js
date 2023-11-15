@@ -42,6 +42,9 @@ router.post("/", async (req, res) => {
     }
   });
 
+
+
+// finish put route**
 // put
 // router.put('/:id', async (req, res) =>{
 //     try{
