@@ -3,6 +3,7 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
+// get a tag
 router.get("/", async (req, res) => {
   try {
     const tagData = await Tag.findAll({
@@ -22,6 +23,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get all tags
 router.get("/:id", async (req, res) => {
   try {
     const tagData = await Tag.findByPk(req.params.id, {
@@ -37,6 +39,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// post new tag
 router.post("/", async (req, res) => {
   try {
     const tagData = await Tag.create(req.body);
@@ -46,7 +49,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// requires updating tag AND THEN fetching the updated tag AFTER updating tag
+// put/update existing tag
 router.put("/:id", async (req, res) => {
   try {
     const [numOfUpdatedRows] = await Tag.update(req.body, {
@@ -64,8 +67,9 @@ router.put("/:id", async (req, res) => {
     console.error(err);
     res.status(500).json({ message: "ERROR Tag failed to update!" });
   }
-});
+}); // requires updating tag AND THEN fetching the updated tag AFTER updating tag
 
+// delete existing tag
 router.delete("/:id", async (req, res) => {
   try {
     const tagToDelete = await Tag.findByPk(req.params.id); 

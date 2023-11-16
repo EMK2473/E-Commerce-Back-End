@@ -3,6 +3,7 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
+// get a category
 router.get("/", async (req, res) => {
   try {
     const categories = await Category.findAll({
@@ -22,6 +23,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get all categories
 router.get("/:id", async (req, res) => {
   try {
     const category = await Category.findByPk(req.params.id, {
@@ -37,6 +39,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// post new category
 router.post("/", async (req, res) => {
   try {
     const newCategory = await Category.create(req.body);
@@ -46,8 +49,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// if update = no req.body where req.params.id exists,, then error, else return update as res.json object
-// ternary expression for conditional
+// put/update existing category
 router.put("/:id", async (req, res) => {
   try {
     const [numOfUpdatedRows] = await Category.update(req.body, {
@@ -70,8 +72,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// if deletedCat doesn't exists = is not the target for destroy() using req.params.id, then error, else return promise of number of rows of deletedCat as res.json object
-// ternary expression for conditional
+// delete existing category
 router.delete("/:id", async (req, res) => {
   try {
     const categoryToDelete = await Category.findByPk(req.params.id);

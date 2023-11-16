@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// update product put
+// put/update existing product 
 router.put('/:id', async (req, res) => {
   try {
     const [numOfUpdatedRows, product] = await Product.update(req.body, {
@@ -98,6 +98,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// delete existing product
 router.delete("/:id", async (req, res) => {
   try {
     const productToDelete = await Product.findByPk(req.params.id);

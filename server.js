@@ -1,16 +1,7 @@
-// req express
-// req the routes
-// define app
-// define local host port
-// process.env here too? research how it works here
-// req sequalize connection
-// make app listen
-
 const express = require("express");
 const routes = require("./routes");
 const sequelize = require("./config/connection");
 const bodyParser = require('body-parser');
-
 
 const app = express();
 const PORT = process.env.PORT || 3001;
