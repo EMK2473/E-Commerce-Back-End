@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// get one product
+// get a product
 router.get("/:id", async (req, res) => {
   try {
     const productID = await Product.findByPk(req.params.id, {
@@ -42,19 +42,19 @@ router.post("/", async (req, res) => {
     }
     res.status(200).json(product);
   } catch (err) {
-    res.status(400).json({ message: "ERROR creating new category!" });
+    res.status(400).json({ message: "ERROR creating new product!" });
   }
 });
 
-// update product
+// update product put
 router.put('/:id', async (req, res) => {
   try {
-    // Update product data
+    // Update product data per .update parameters
     const [numOfUpdatedRows, product] = await Product.update(req.body, {
       where: {
         id: req.params.id,
       },
-      returning: true, // Return the updated product
+      returning: true, // Return the updated product  per .update parameters
     });
 
     if (req.body.tagIds && req.body.tagIds.length) {
@@ -83,7 +83,6 @@ router.put('/:id', async (req, res) => {
         ProductTag.bulkCreate(newProductTags),
       ]);
     }
-
     res.json({ numOfUpdatedRows, product});
   } catch (err) {
     console.error(err);
