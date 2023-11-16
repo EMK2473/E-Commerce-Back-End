@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
     const productNames = products.map(product => product.product_name);
     res.status(200).json({
       products: products,
-      message: `Products: ${productNames.join(', ')} found!`,
+      message: `Products: [${productNames.join(', ')}] found! [${productNames.length}]`,
     });
   } catch (err) {
     res.status(500).json({ message: "ERROR Products not found!" });

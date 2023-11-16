@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
     const categoryNames = categories.map(category => category.category_name);
     res.status(200).json({
       categories: categories,
-      message: `Categories: ${categoryNames.join(', ')} found!`,
+      message: `Categories:[${categoryNames.join(', ')}] found! [${categories.length}]`,
     });
   } catch (err) {
     res.status(500).json({ message: "ERROR; Category not found!" });
@@ -31,7 +31,7 @@ router.get("/:id", async (req, res) => {
       res.status(404).json({ message: "ERROR; ID not found!" });
       return;
     }
-    res.status(200).json({category: category, message: `Category ${category.category_name} found!`});
+    res.status(200).json({category: category, message: `Category: ${category.category_name} found!`});
   } catch (err) {
     res.status(500).json({ message: "ERROR finding ID!" });
   }

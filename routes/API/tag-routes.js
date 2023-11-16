@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
     const tagNames = tagData.map(tag => tag.tag_name);
     res.status(200).json({
       tags: tagData,
-      message: `Tags: ${tagNames.join(', ')} found!`,
+      message: `Tags: [${tagNames.join(', ')}] found! [${tagNames.length}]`,
     });
   } catch (err) {
     res.status(500).json({ message: "ERROR Tags not found!" });
@@ -40,7 +40,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const tagData = await Tag.create(req.body);
-    res.status(200).json(tagData);
+    res.status(200).json({tags: tagData, message: `Tag ${tagData.tag_name} Updated!`});
   } catch (err) {
     res.status(400).json({ message: "ERROR Failed creating Tag!" });
   }
@@ -53,7 +53,7 @@ router.put("/:id", async (req, res) => {
     });
     !updated[0]
       ? res.status(404).json({ message: "ERROR No Tag found!" })
-      : res.status(200).json(updated);
+      : res.status(200).json({tags:updated, message: `Tag ${updated.tag_name} Updated!`});
   } catch (err) {
     res.status(500).json({ message: "ERROR Tag failed to update!" });
   }
