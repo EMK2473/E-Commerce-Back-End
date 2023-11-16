@@ -53,10 +53,17 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const deleted = await Tag.destroy({ where: { id: req.params.id } });
-    !deleted
-      ? res.status(404).json({ message: "ERROR No Tag found!" })
-      : res.status(200).json(deleted);
+    const tagToDelete = await Tag.findByPk(req.params.id); 
+    if (!tagToDelete) {
+      return res.status(404).json({ message: "ERROR No Tag found!" });
+    }
+    await Tag.destroy({
+      where: { id: req.params.id },
+    });  
+    res.status(200).json({
+      tag: tagToDelete,
+      message: `Tag ${tagToDelete.tag_name} deleted!`,
+    });
   } catch (err) {
     res.status(500).json({ message: "ERROR failed to delete Tag!" });
   }

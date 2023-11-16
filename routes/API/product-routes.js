@@ -9,7 +9,14 @@ router.get("/", async (req, res) => {
     const products = await Product.findAll({
       include: [{ model: Category }, { model: Tag }],
     });
-    res.status(200).json(products);
+    if (products.length === 0) {
+      return res.status(404).json({ message: "ERROR; No products found!" });
+    }
+    const productNames = products.map(product => product.product_name);
+    res.status(200).json({
+      products: products,
+      message: `Products ${productNames.join(', ')} found!`,
+    });
   } catch (err) {
     res.status(500).json({ message: "ERROR Products not found!" });
   }
@@ -92,12 +99,18 @@ router.put('/:id', async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const deletedID = await Product.destroy({
+    const productToDelete = await Product.findByPk(req.params.id);
+
+    if (!productToDelete) {
+      return res.status(404).json({ message: "ERROR ID not found!" });
+    }
+    await Product.destroy({
       where: { id: req.params.id },
     });
-    !deletedID
-      ? res.status(404).json({ message: "ERROR ID not found!" })
-      : res.status(200).json(deletedID);
+    res.status(200).json({
+      product: productToDelete,
+      message: `Product ${productToDelete.product_name} deleted!`,
+    });
   } catch (err) {
     res.status(500).json({ message: "ERROR Failed to delete product!" });
   }

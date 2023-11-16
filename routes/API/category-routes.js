@@ -5,10 +5,18 @@ const { Category, Product } = require('../../models');
 
 router.get("/", async (req, res) => {
   try {
-    const category = await Category.findAll({
+    const categories = await Category.findAll({
       include: [{ model: Product }],
     });
-    res.status(200).json(category);
+
+    if (categories.length === 0) {
+      return res.status(404).json({ message: "ERROR; No categories found!" });
+    }
+    const categoryNames = categories.map(category => category.category_name);
+    res.status(200).json({
+      categories: categories,
+      message: `Categories ${categoryNames.join(', ')} found!`,
+    });
   } catch (err) {
     res.status(500).json({ message: "ERROR; Category not found!" });
   }
@@ -23,7 +31,7 @@ router.get("/:id", async (req, res) => {
       res.status(404).json({ message: "ERROR; ID not found!" });
       return;
     }
-    res.status(200).json(category);
+    res.status(200).json({category: category, message: `Category ${category.category_name} found!`});
   } catch (err) {
     res.status(500).json({ message: "ERROR finding ID!" });
   }
@@ -32,7 +40,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const newCategory = await Category.create(req.body);
-    res.status(200).json(newCategory, { message: "Category Created!"});
+    res.status(200).json({category: newCategory, message: `Category ${newCategory.category_name} Created!`});
   } catch (err) {
     res.status(400).json({ message: "ERROR creating new category!" });
   }
@@ -47,7 +55,7 @@ router.put("/:id", async (req, res) => {
     });
     !updatedCat[0]
       ? res.status(404).json({ message: "ERROR; ID not found!" })
-      : res.status(200).json(updatedCat, { message: "Category Updated!"});
+      : res.status(200).json({ category: updatedCat, message: `Category ${updatedCat.category_name} Created!`});
   } catch (err) {
     res.status(500).json({ message: "ERROR updating Category ID!" });
   }
@@ -57,12 +65,17 @@ router.put("/:id", async (req, res) => {
 // ternary expression for conditional
 router.delete("/:id", async (req, res) => {
   try {
-    const deletedCat = await Category.destroy({
+    const categoryToDelete = await Category.findByPk(req.params.id);
+    if (!categoryToDelete) {
+      return res.status(404).json({ message: "ERROR ID not found!" });
+    }
+    await Category.destroy({
       where: { id: req.params.id },
     });
-    !deletedCat
-      ? res.status(404).json({ message: "ERROR ID not found!" })
-      : res.status(200).json(deletedCat);
+    res.status(200).json({
+      category: categoryToDelete,
+      message: `Category ${categoryToDelete.category_name} deleted!`,
+    });
   } catch (err) {
     res.status(500).json({ message: "ERROR deleting category!" });
   }
