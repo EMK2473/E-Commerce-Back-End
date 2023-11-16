@@ -31,7 +31,7 @@ router.get("/:id", async (req, res) => {
       res.status(404).json({ message: "ERROR Tag not found!" });
       return;
     }
-    res.status(200).json(tagData);
+    res.status(200).json({tag: tagData, message: `Tag: ${tagData.tag_name} found!`});
   } catch (err) {
     res.status(500).json({ message: "ERROR Tag not found!" });
   }
@@ -40,21 +40,28 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const tagData = await Tag.create(req.body);
-    res.status(200).json({tags: tagData, message: `Tag ${tagData.tag_name} Updated!`});
+    res.status(200).json({tags: tagData, message: `Tag ${tagData.tag_name} created!`});
   } catch (err) {
     res.status(400).json({ message: "ERROR Failed creating Tag!" });
   }
 });
 
+// requires updating tag AND THEN fetching the updated tag AFTER updating tag
 router.put("/:id", async (req, res) => {
   try {
-    const updated = await Tag.update(req.body, {
+    const [numOfUpdatedRows] = await Tag.update(req.body, {
       where: { id: req.params.id },
     });
-    !updated[0]
-      ? res.status(404).json({ message: "ERROR No Tag found!" })
-      : res.status(200).json({tags:updated, message: `Tag ${updated.tag_name} Updated!`});
+    if (numOfUpdatedRows === 0) {
+      return res.status(404).json({ message: "ERROR No Tag found!" });
+    }
+    const updatedTag = await Tag.findByPk(req.params.id);
+    if (!updatedTag) {
+      return res.status(404).json({ message: "ERROR Updated tag not found!" });
+    }
+    res.status(200).json({ tags: updatedTag, message: `Tag ${updatedTag.tag_name} Updated!` });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "ERROR Tag failed to update!" });
   }
 });

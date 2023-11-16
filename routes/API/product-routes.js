@@ -30,24 +30,24 @@ router.get("/:id", async (req, res) => {
     });
     !productID
       ? res.status(404).json({ message: "ERROR Product ID not found!" })
-      : res.status(200).json(productID);
+      : res.status(200).json({product: productID, message: `Product ${productID.product_name} found!`});
   } catch (err) {
-    res.status(500).json({ messag: "ERROR Product ID not found!" });
+    res.status(500).json({ message: "ERROR Product ID not found!" });
   }
 });
 
-// create new product
+// post new product
 router.post("/", async (req, res) => {
   try {
     const product = await Product.create(req.body);
-    if (req.body.tagIds.length) {
+    if (req.body.tagIds && req.body.tagIds.length) {
       const productTagIds = req.body.tagIds.map((tag_id) => ({
         product_id: product.id,
         tag_id,
       }));
       await ProductTag.bulkCreate(productTagIds);
     }
-    res.status(200).json(product);
+    res.status(200).json({product: product, message: `Product ${product.product_name} Created!`});
   } catch (err) {
     res.status(400).json({ message: "ERROR creating new product!" });
   }
@@ -62,7 +62,13 @@ router.put('/:id', async (req, res) => {
       },
       returning: true,
     });
-
+    if (numOfUpdatedRows === 0) {
+      return res.status(404).json({ message: "ERROR; Product and/or ID not found!" });
+    }
+    const updatedProduct = await Product.findByPk(req.params.id); // query the updated product separately
+    if (!updatedProduct) {
+      return res.status(404).json({ message: "ERROR; Updated product not found!" });
+    }
     if (req.body.tagIds && req.body.tagIds.length) {
       const productTags = await ProductTag.findAll({
         where: { product_id: req.params.id },
@@ -82,7 +88,10 @@ router.put('/:id', async (req, res) => {
         ProductTag.bulkCreate(newProductTags),
       ]);
     }
-    res.json({ numOfUpdatedRows, product});
+    res.status(200).json({
+      product: updatedProduct,
+      message: `Product ${updatedProduct.product_name} Updated!`,
+    });
   } catch (err) {
     console.error(err);
     res.status(400).json(err);
