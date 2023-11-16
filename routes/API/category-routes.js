@@ -50,14 +50,23 @@ router.post("/", async (req, res) => {
 // ternary expression for conditional
 router.put("/:id", async (req, res) => {
   try {
-    const updatedCat = await Category.update(req.body, {
+    const [numOfUpdatedRows] = await Category.update(req.body, {
       where: { id: req.params.id },
     });
-    !updatedCat[0]
-      ? res.status(404).json({ message: "ERROR; ID not found!" })
-      : res.status(200).json({ category: updatedCat, message: `Category ${updatedCat.category_name} Updated!`});
+    if (numOfUpdatedRows === 0) {
+      return res.status(404).json({ message: "ERROR; Category and/or ID not found!" });
+    }
+    const updatedCategory = await Category.findByPk(req.params.id); // query the updated category separately
+    if (!updatedCategory) {
+      return res.status(404).json({ message: "ERROR; Updated category not found!" });
+    }
+    res.status(200).json({
+      category: updatedCategory,
+      message: `Category ${updatedCategory.category_name} Updated!`,
+    });
   } catch (err) {
-    res.status(500).json({ message: "ERROR updating Category ID!" });
+    console.error(err);
+    res.status(500).json({ message: "ERROR updating Category!" });
   }
 });
 
