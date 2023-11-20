@@ -69,11 +69,12 @@ router.put('/:id', async (req, res) => {
     if (!updatedProduct) {
       return res.status(404).json({ message: "ERROR; Updated product not found!" });
     }
+    let productTagIds;
     if (req.body.tagIds && req.body.tagIds.length) {
       const productTags = await ProductTag.findAll({
         where: { product_id: req.params.id },
       });
-      const productTagIds = productTags.map(({ tag_id }) => tag_id);
+      productTagIds = productTags.map(({ tag_id }) => tag_id);
       const newProductTags = req.body.tagIds
         .filter((tag_id) => !productTagIds.includes(tag_id))
         .map((tag_id) => ({
@@ -89,7 +90,8 @@ router.put('/:id', async (req, res) => {
       ]);
     }
     res.status(200).json({
-      product: updatedProduct,
+      product: updatedProduct, 
+      tag: productTagIds,
       message: `Product ${updatedProduct.product_name} Updated!`,
     });
   } catch (err) {
